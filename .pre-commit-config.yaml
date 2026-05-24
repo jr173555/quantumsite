@@ -1,6 +1,6 @@
 # See https://pre-commit.com for more information
 
-default_stages: [commit, push]
+default_stages: [pre-commit, pre-push]
 default_install_hook_types: [pre-commit, pre-push, commit-msg]
 
 repos:

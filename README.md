@@ -24,6 +24,12 @@ Install in editable mode so changes to the source are reflected immediately with
 pip install -e ".[dev]"
 ```
 
+If this is your first time installing the package in your environment, make sure to run:
+
+```bash
+pre-commit install
+```
+
 To also install test and documentation dependencies:
 
 ```bash
