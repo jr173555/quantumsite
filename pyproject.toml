@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantumsite"
+version = "0.1.0"
+description = "A short description"
+authors = [{name = "Annika Hartz", email = "annikahartz278@gmail.com"},
+           {name = "Carlos Diaz", email = "diazlcarlos98@gmail.com"}]
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "plotly",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "pre-commit",
+    "ruff",
+]
+docs = [
+    "sphinx",
+]
+test = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
