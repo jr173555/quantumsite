@@ -8,17 +8,19 @@ A tool that uses quantum-inspired optimization algorithms to plan optimal robot 
 
 ## Install (standard)
 
-```bash
-pip install quantumsite
-```
-
-## Install (development)
-
-Clone the repository and install in editable mode so changes to the source are reflected immediately without reinstalling:
+To clone and install the repository, run:
 
 ```bash
 git clone https://github.com/jr173555/quantumsite.git
 cd quantumsite
+pip install .
+```
+
+## Install (development)
+
+Install in editable mode so changes to the source are reflected immediately without reinstalling
+
+```bash
 pip install -e ".[dev]"
 ```
 
