@@ -1,3 +1,7 @@
+import numpy as np
+import networkx as nx
+
+
 def unspec_grid(n: int) -> tuple[list[tuple[int, int, int]], list[tuple[int, int]]]:
     """Generate vertices and edges for an n×n 2D grid in the z=0 plane.
 
@@ -43,3 +47,39 @@ def unspec_grid(n: int) -> tuple[list[tuple[int, int, int]], list[tuple[int, int
                 edges.append((idx1, idx3))
 
     return coords, edges
+
+
+def grid_into_graph(
+    coords: list[tuple[int, int, int]],
+    edges: list[tuple[int, int]],
+    distance_weight: bool = False,
+) -> nx.Graph:
+    """Convert grid vertices and edges into a NetworkX graph.
+
+    The weights of the edges can be set to the Euclidean distance between vertices if
+    `distance_weight` is True.  Otherwise, edges will have a default weight of 1.
+
+    Args:
+        coords: A list of vertex coordinates as (x, y, z) tuples.
+        edges: A list of edges as (idx1, idx2) tuples where each index
+            corresponds to a vertex in *coords*.
+        distance_weight: Whether to use Euclidean distance as edge weights.
+
+    Returns:
+        A NetworkX graph where each vertex is labeled with its (x, y, z)
+        coordinate and edges connect adjacent vertices as specified by *edges*.
+    """
+    graph = nx.Graph()
+    for idx, coord in enumerate(coords):
+        graph.add_node(idx, coord=coord)
+    for idx1, idx2 in edges:
+        graph.add_edge(idx1, idx2)
+    if distance_weight:
+        positions1 = np.array([coord[edge[0]] for edge in edges])
+        positions2 = np.array([coord[edge[1]] for edge in edges])
+        weights = np.linalg.norm(positions1 - positions2, axis=1)
+    else:
+        weights = np.ones(len(edges))
+    for (idx1, idx2), weight in zip(edges, weights):
+        graph.edges[idx1, idx2]["weight"] = weight
+    return graph

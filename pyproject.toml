@@ -12,6 +12,8 @@ requires-python = ">=3.12"
 dependencies = [
     "numpy",
     "plotly",
+    "networkx",
+    "matplotlib",
 ]
 
 [project.optional-dependencies]
